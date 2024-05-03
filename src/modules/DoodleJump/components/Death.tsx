@@ -19,8 +19,8 @@ export const Death = memo(({}) => {
 const styles = StyleSheet.create({
     lottie_death: {
         width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT / 2.2,
+        height: SCREEN_HEIGHT / 2,
         position: 'absolute',
-        bottom: 0
+        bottom: -20
     }
 })

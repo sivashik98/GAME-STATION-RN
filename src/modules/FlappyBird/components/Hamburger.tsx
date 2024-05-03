@@ -1,9 +1,10 @@
+import {memo} from "react";
 import {StyleSheet} from "react-native";
 import {TouchableOpacity} from "react-native-ui-lib";
 
 import {UIView} from "../../../components/UIView";
 
-export const Hamburger = ({shouldShow, onPress}) => {
+export const Hamburger = memo(({shouldShow, onPress}) => {
     if (!shouldShow) return null
     return (
         <TouchableOpacity
@@ -16,12 +17,12 @@ export const Hamburger = ({shouldShow, onPress}) => {
             <UIView marginT-4 style={styles.item}/>
         </TouchableOpacity>
     )
-}
+})
 
 const styles = StyleSheet.create({
     container: {
         padding: 8,
-        backgroundColor: '#4e56b8',
+        backgroundColor: '#9e6a00',
         borderWidth: 2,
         borderRadius: 10,
     },

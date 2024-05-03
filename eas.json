@@ -1,0 +1,18 @@
+{
+  "build": {
+    "development-simulator": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "prod-test": {
+      "distribution": "internal",
+      "android": {
+        "developmentClient": true,
+        "gradleCommand": ":app:assembleRelease"
+      }
+    },
+  }
+}

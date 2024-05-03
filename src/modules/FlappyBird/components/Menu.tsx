@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, memo} from "react";
 import {StyleSheet} from "react-native";
 import {useAnimatedStyle, withTiming} from "react-native-reanimated";
 import {useAsyncStorage} from "@react-native-async-storage/async-storage";
@@ -6,10 +6,10 @@ import {useAsyncStorage} from "@react-native-async-storage/async-storage";
 import {UIView} from "../../../components/UIView";
 import {Button} from "./Button";
 import {UIText} from "../../../components/UIText";
+
 import {SCREEN_WIDTH} from "../../../constants";
 
-
-export const Menu = ({isLooser, shouldShow, score, coins, buttons}) => {
+export const Menu = memo(({isLooser, shouldShow, score, coins, buttons}) => {
     const [record, setRecord] = useState('')
     const {getItem, setItem} = useAsyncStorage('@record')
 
@@ -29,8 +29,9 @@ export const Menu = ({isLooser, shouldShow, score, coins, buttons}) => {
     }, [isLooser])
 
     const animatedStyles = useAnimatedStyle(() => ({
-        transform: [{scale: withTiming(shouldShow ? 1 : 0)}],
-        zIndex: withTiming(shouldShow ? 1 : 0)
+        transform: [{scale: withTiming(shouldShow ? 1 : 0.5)}],
+        opacity: withTiming(shouldShow ? 1 : 0),
+        zIndex: withTiming(shouldShow ? 1 : -1)
     }), [shouldShow])
 
     return (
@@ -57,7 +58,7 @@ export const Menu = ({isLooser, shouldShow, score, coins, buttons}) => {
             </UIView>
         </UIView>
     )
-}
+})
 
 
 const styles = StyleSheet.create({
@@ -70,18 +71,18 @@ const styles = StyleSheet.create({
     },
     menu: {
         padding: 25,
-        backgroundColor: '#4e56b8',
+        backgroundColor: '#81a04a',
         borderWidth: 2,
-        borderColor: '#fff',
+        borderColor: '#000',
         borderRadius: 10,
         minWidth: SCREEN_WIDTH / 1.5,
     },
     board: {
         borderWidth: 2,
-        borderColor: '#fff',
+        borderColor: '#000',
         padding: 10,
         paddingVertical: 20,
-        backgroundColor: '#8d3434',
+        backgroundColor: '#348d8d',
         borderRadius: 10,
         marginBottom: 20,
     },

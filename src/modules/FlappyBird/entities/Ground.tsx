@@ -1,6 +1,10 @@
-import * as Matter from "matter-js";
+import {Bodies, World} from "matter-js";
+import LottieView from "lottie-react-native";
 
 import {UIView} from "../../../components/UIView";
+
+import {FIRE_SOURCE} from "../constants";
+import {SCREEN_WIDTH} from "../../../constants";
 
 const Ground = ({body}) => {
     const widthBody = body.bounds.max.x - body.bounds.min.x
@@ -11,23 +15,34 @@ const Ground = ({body}) => {
     return (
         <UIView
             style={{
-                // backgroundColor: color,
                 position: 'absolute',
                 left: xBody,
                 top: yBody,
                 width: widthBody,
                 height: heightBody
             }}
-        />
+        >
+            <LottieView
+                source={FIRE_SOURCE}
+                autoPlay
+                loop
+                style={{
+                    position: 'absolute',
+                    top: -SCREEN_WIDTH / 1.5,
+                    width: SCREEN_WIDTH,
+                    height: SCREEN_WIDTH,
+                }}
+            />
+        </UIView>
     )
 }
 
 export default (world, position, size) => {
-    const initialGround = Matter.Bodies.rectangle(position.x, position.y, size.width, size.height, {
+    const initialGround = Bodies.rectangle(position.x, position.y, size.width, size.height, {
         label: 'Ground',
         isStatic: true
     })
-    Matter.World.add(world, initialGround)
+    World.add(world, initialGround)
 
     return {
         body: initialGround,

@@ -12,7 +12,7 @@ import {Background} from "../components/Background";
 
 import entities from '../entities';
 import Physics from '../physics';
-import {COIN_SOUND_SOURCE, COLLECT, DIE_SOUND_SOURCE, GAME_OVER, SCORE} from "../constants";
+import {COIN_SOUND_SOURCE, COLLECT, DIE_SOUND_SOURCE, GAME_OVER, MUSIC_CONFIG, SCORE} from "../constants";
 
 export const Game = ({
                          isRunning,
@@ -31,8 +31,8 @@ export const Game = ({
 
     useEffect(() => {
         const downloadSound = async () => {
-            const {sound: coinSound} = await Audio.Sound.createAsync(COIN_SOUND_SOURCE);
-            const {sound: dieSound} = await Audio.Sound.createAsync(DIE_SOUND_SOURCE);
+            const {sound: coinSound} = await Audio.Sound.createAsync(COIN_SOUND_SOURCE, MUSIC_CONFIG.score);
+            const {sound: dieSound} = await Audio.Sound.createAsync(DIE_SOUND_SOURCE, MUSIC_CONFIG.die);
 
             setCoinSound(coinSound);
             setDieSound(dieSound);
@@ -45,7 +45,6 @@ export const Game = ({
             coinSound?.unloadAsync()
         };
     }, [])
-
     useEffect(() => {
         return () => {
             dieSound?.unloadAsync()
@@ -59,20 +58,20 @@ export const Game = ({
 
     const handleEvent = async ({type}) => {
         if (type === GAME_OVER) {
-            await dieSound.setPositionAsync(0);
-            await dieSound.playAsync();
+            await dieSound?.setPositionAsync(0);
+            await dieSound?.playAsync();
+            await impactAsync(ImpactFeedbackStyle.Heavy);
             onStop()
             onLoose()
-            impactAsync(ImpactFeedbackStyle.Heavy);
         }
         if (type === SCORE) {
             onChangeScore(score + 1)
         }
         if (type === COLLECT) {
+            await impactAsync(ImpactFeedbackStyle.Light);
+            await coinSound?.setPositionAsync(0);
+            await coinSound?.playAsync();
             onChangeCoins(coins + 1)
-            impactAsync(ImpactFeedbackStyle.Light);
-            await coinSound.setPositionAsync(0);
-            await coinSound.playAsync();
         }
     }
 
@@ -88,7 +87,7 @@ export const Game = ({
             />
             <Background/>
             <Score isLooser={isLooser} score={score} coins={coins}/>
-            <UIView style={[styles.hamburgerContainer, {top}]}>
+            <UIView style={[styles.hamburger, {top}]}>
                 <Hamburger shouldShow={isRunning} onPress={onStop}/>
             </UIView>
         </UIView>
@@ -104,7 +103,7 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0,
     },
-    hamburgerContainer: {
+    hamburger: {
         position: 'absolute',
         right: 10
     },

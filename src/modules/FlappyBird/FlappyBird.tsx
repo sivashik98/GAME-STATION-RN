@@ -10,14 +10,14 @@ import entities from './entities';
 import {BACKGROUND_SOUND_SOURCE, MUSIC_CONFIG} from "./constants";
 
 export const FlappyBird = () => {
+    const gameEngineRef = useRef()
+    const {goBack} = useNavigation()
     const [isFirstPlay, setIsFirstPlay] = useState(true)
     const [isRunning, setIsRunning] = useState(false)
     const [isLooser, setIsLooser] = useState(false)
     const [score, setScore] = useState(0)
     const [coins, setCoins] = useState(0)
     const [sound, setSound] = useState();
-    const gameEngineRef = useRef()
-    const {goBack} = useNavigation()
     const BUTTONS = isLooser ? [{
         title: 'Play again', onPress: () => {
             setIsRunning(true)
@@ -40,7 +40,7 @@ export const FlappyBird = () => {
         const downloadSound = async () => {
             const {sound} = await Audio.Sound.createAsync(BACKGROUND_SOUND_SOURCE, MUSIC_CONFIG.background);
             setSound(sound);
-            await sound.playAsync()
+            await sound?.playAsync()
         }
 
         downloadSound()
@@ -65,7 +65,8 @@ export const FlappyBird = () => {
                     setIsRunning(false)
                     gameEngineRef.current.stop()
                 }}
-                onLoose={() => setIsLooser(true)}/>
+                onLoose={() => setIsLooser(true)}
+            />
             <Menu isLooser={isLooser} score={score} coins={coins} shouldShow={!isRunning} buttons={BUTTONS}/>
         </UIView>
     )

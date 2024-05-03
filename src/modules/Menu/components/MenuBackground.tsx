@@ -1,16 +1,11 @@
-import {UIView} from "../../../components/UIView";
-import {UIText} from "../../../components/UIText";
 import {StyleSheet} from "react-native";
 import LottieView from "lottie-react-native";
-import {TouchableOpacity} from "react-native-ui-lib";
-import {LinearGradient} from 'expo-linear-gradient';
-import {useNavigation} from "@react-navigation/native";
+
+import {UIView} from "../../../components/UIView";
+
 import {SCREEN_WIDTH} from "../../../constants";
 
-
 export const MenuBackground = ({}) => {
-    const {navigate} = useNavigation()
-
     return (
         <UIView style={styles.container}>
             <LottieView
@@ -39,6 +34,7 @@ const styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
+        backgroundColor: '#efefef',
     },
     background: {
         width: SCREEN_WIDTH,

@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import * as Matter from "matter-js";
+import {Bodies, World} from "matter-js";
 import LottieView from "lottie-react-native";
 import {useAnimatedStyle, useSharedValue, withRepeat, withSequence, withTiming} from "react-native-reanimated";
 
@@ -57,12 +57,12 @@ const Coin = ({body}) => {
 }
 
 export default (world, position, radius) => {
-    const initialCoin = Matter.Bodies.circle(position.x, position.y, radius, {
+    const initialCoin = Bodies.circle(position.x, position.y, radius, {
         isStatic: true,
         isSensor: true,
         label: 'Coin',
     })
-    Matter.World.add(world, initialCoin)
+    World.add(world, initialCoin)
 
     return {
         body: initialCoin,

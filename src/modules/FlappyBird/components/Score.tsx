@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, memo} from "react";
 import {StyleSheet} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 import {useAnimatedStyle, useSharedValue, withSequence, withSpring, withTiming} from "react-native-reanimated";
@@ -9,25 +9,19 @@ import {UIText} from "../../../components/UIText";
 
 import {COIN_SOURCE} from "../constants";
 
-export const Score = ({isLooser, score, coins}) => {
+export const Score = memo(({isLooser, score, coins}) => {
     const {top} = useSafeAreaInsets()
     const scale = useSharedValue(1)
-    const opacity = useSharedValue(1)
 
     useEffect(() => {
         scale.value = withSequence(withSpring(1.2), withSpring(1))
     }, [score])
 
-    useEffect(() => {
-        console.log(isLooser)
-        opacity.value = isLooser ? withTiming(0) : withTiming(1)
-    }, [isLooser])
-
     const scaleAnimatedStyles = useAnimatedStyle(() => ({
         transform: [{scale: scale.value}]
     }))
     const opacityAnimatedStyles = useAnimatedStyle(() => ({
-        opacity: opacity.value
+        opacity: isLooser ? withTiming(0) : withTiming(1)
     }))
 
     return (
@@ -50,7 +44,7 @@ export const Score = ({isLooser, score, coins}) => {
             </UIView>
         </UIView>
     )
-}
+})
 
 
 const styles = StyleSheet.create({

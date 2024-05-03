@@ -1,11 +1,11 @@
-import {UIView} from "../../../components/UIView";
-import {UIText} from "../../../components/UIText";
 import {StyleSheet} from "react-native";
 import LottieView from "lottie-react-native";
 import {TouchableOpacity} from "react-native-ui-lib";
 import {LinearGradient} from 'expo-linear-gradient';
 import {useNavigation} from "@react-navigation/native";
 
+import {UIView} from "../../../components/UIView";
+import {UIText} from "../../../components/UIText";
 
 export const MenuItem = ({name, source}) => {
     const {navigate} = useNavigation()
@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     icon: {
         width: 100,
         height: 50,
-        // backgroundColor: '#eee',
         marginLeft: 20
     },
 

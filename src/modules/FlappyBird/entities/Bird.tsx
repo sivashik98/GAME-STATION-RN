@@ -1,5 +1,5 @@
 import LottieView from "lottie-react-native";
-import * as Matter from "matter-js";
+import {Bodies, World} from "matter-js";
 
 import {UIView} from "../../../components/UIView";
 
@@ -10,14 +10,11 @@ const Bird = ({body}) => {
     const heightBody = body.bounds.max.y - body.bounds.min.y
     const xBody = body.position.x - widthBody / 2
     const yBody = body.position.y - heightBody / 2
-
     const sizeIndex = 25
 
     return (
         <UIView
             style={{
-                // borderWidth: 2,
-                // borderColor: color,
                 position: 'absolute',
                 left: xBody,
                 top: yBody,
@@ -42,8 +39,8 @@ const Bird = ({body}) => {
 }
 
 export default (world, position, size) => {
-    const initialBird = Matter.Bodies.rectangle(position.x, position.y, size.width, size.height, {label: 'Bird'})
-    Matter.World.add(world, initialBird)
+    const initialBird = Bodies.rectangle(position.x, position.y, size.width, size.height, {label: 'Bird'})
+    World.add(world, initialBird)
 
     return {
         body: initialBird,

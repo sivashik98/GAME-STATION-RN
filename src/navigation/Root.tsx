@@ -35,7 +35,6 @@ const NavigationFlow = () => (
 export const RootNavigation = () => {
     const navigationContainerRef = useNavigationContainerRef(); // You can also use a regular ref with `React.useRef()`
 
-
     return (
         <NavigationContainer ref={navigationContainerRef}>
             <NavigationFlow/>

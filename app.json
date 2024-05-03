@@ -15,13 +15,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMotionUsageDescription": "Allow $(PRODUCT_NAME) to access your device motion."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sivashik98.gamestation"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,6 +37,11 @@
           "motionPermission": "Allow $(PRODUCT_NAME) to access your device motion."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "27fd198d-3367-47ea-82cb-4246fd2786b8"
+      }
+    }
   }
 }

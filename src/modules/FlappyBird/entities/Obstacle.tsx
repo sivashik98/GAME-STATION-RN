@@ -1,8 +1,9 @@
-import * as Matter from "matter-js";
+import {Bodies, World} from "matter-js";
 import {StyleSheet} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 
 import {UIView} from "../../../components/UIView";
+
 import {PIPE_SIZE} from "../constants";
 
 const Obstacle = ({body, holePipePosition}) => {
@@ -10,7 +11,11 @@ const Obstacle = ({body, holePipePosition}) => {
     const heightBody = body.bounds.max.y - body.bounds.min.y
     const xBody = body.position.x - widthBody / 2
     const yBody = body.position.y - heightBody / 2
-    const holeStyles = holePipePosition === 'bottom' ? {top: -2} : {bottom: -2}
+    const holeStyles = holePipePosition === 'bottom' ? {top: -2, backgroundColor: '#6d2900'} : {
+        bottom: -2,
+        backgroundColor: 'rgb(0,69,67)'
+    }
+    const colors = holePipePosition === 'bottom' ? ['#ffa670', 'rgb(112,168,0)'] : ['#97ff70', 'rgb(0,135,130)']
 
     return (
         <UIView
@@ -23,7 +28,7 @@ const Obstacle = ({body, holePipePosition}) => {
                 }]}
         >
             <LinearGradient
-                colors={['#a7a7a7', 'rgb(47,81,255)']}
+                colors={colors}
                 style={{flex: 1}}
             />
 
@@ -33,11 +38,11 @@ const Obstacle = ({body, holePipePosition}) => {
 }
 
 export default (world, label, position, size, holePipePosition) => {
-    const initialObstacle = Matter.Bodies.rectangle(position.x, position.y, size.width, size.height, {
+    const initialObstacle = Bodies.rectangle(position.x, position.y, size.width, size.height, {
         label,
         isStatic: true,
     })
-    Matter.World.add(world, initialObstacle)
+    World.add(world, initialObstacle)
 
     return {
         body: initialObstacle,
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: ((PIPE_SIZE.width - 110) / 2) - 2,
         bottom: 0,
-        backgroundColor: '#011892',
+        backgroundColor: '#136500',
         borderWidth: 2,
         borderRadius: 10
     }

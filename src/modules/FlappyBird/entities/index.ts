@@ -13,9 +13,10 @@ import {SCREEN_HEIGHT, SCREEN_WIDTH} from "../../../constants";
 export default restart = () => {
     const engine = Matter.Engine.create({enableSleeping: false})
     const world = engine.world
+    world.gravity.y = GRAVITY
     const {coin, pipeTop, pipeBottom} = getPipesAndCoinData()
     const {pipeTop: substitutePipeTop, pipeBottom: substitutePipeBottom} = getPipesAndCoinData(SCREEN_WIDTH / 1.5)
-    world.gravity.y = GRAVITY
+
 
     return {
         physics: {engine, world},

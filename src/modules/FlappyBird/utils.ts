@@ -1,11 +1,11 @@
 import {PIPE_SIZE, PIPES_SPACE, COIN_RADIUS} from "./constants";
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from "../../constants";
 
-export const getRandom = (min, max) => {
+export const getRandom = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-export const getPipesAndCoinData = (addToPositionX = 0) => {
+export const getPipesAndCoinData = (addToPositionX: number = 0) => {
     const randomYPosition = getRandom(100, -300)
 
     const pipeTop = {
