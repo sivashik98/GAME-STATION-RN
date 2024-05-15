@@ -1,4 +1,4 @@
-**GAME STATION iOS/Android app**
+# GAME STATION iOS/Android app
 
 Чтобы протестировать приложение на android перейдите по ссылке на облако mail в котором лежит **APK** файл который можно скачать и установить
 ссылка - https://cloud.mail.ru/public/SAET/FaNazg4As
